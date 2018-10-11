@@ -3,24 +3,30 @@
     "name": "filter-search-result",
     "version": "0.0.1",
     "description": "for filter chrome search results",
-    "permissions": ["storage", "declarativeContent", "activeTab"],
+    "permissions": ["storage", "declarativeContent", "activeTab", "https://*/*", "downloads"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
     },
-    "page_action": {
+    "browser_action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "images/logo_16.png",
             "32": "images/logo_32.png",
             "48": "images/logo_48.png",
             "128": "images/logo_128.png"
-        }
+        },
+        "default_title":"过滤指定搜索结果"
     },
     "icons": {
         "16": "images/logo_16.png",
         "32": "images/logo_32.png",
         "48": "images/logo_48.png",
         "128": "images/logo_128.png"
-    }
+    },
+    "options_page": "options.html",
+    "content_scripts": [{
+        "matches": ["https://www.baidu.com/*", "https://www.google.com/*", "https://www.google.co.jp/*", "https://www.google.com.hk/*"],
+        "js": ["filter.js"]
+    }]
 }
